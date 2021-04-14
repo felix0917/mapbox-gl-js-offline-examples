@@ -4,19 +4,19 @@
 
 #####   **mapbox gl js offline examples | 离线示例**
 
-![](D:\study\coding\tomcat\apache-tomcat-9.0.12\webapps\mapbox-gl-js-offline-examples\data\images\readme\1.png)
+![](data\images\readme\1.png)
 
-![](D:\study\coding\tomcat\apache-tomcat-9.0.12\webapps\mapbox-gl-js-offline-examples\data\images\readme\2.png)
+![](data\images\readme\2.png)
 
-![](D:\study\coding\tomcat\apache-tomcat-9.0.12\webapps\mapbox-gl-js-offline-examples\data\images\readme\3.png)
+![](data\images\readme\3.png)
 
-![](D:\study\coding\tomcat\apache-tomcat-9.0.12\webapps\mapbox-gl-js-offline-examples\data\images\readme\4.png)
+![](data\images\readme\4.png)
 
-![](D:\study\coding\tomcat\apache-tomcat-9.0.12\webapps\mapbox-gl-js-offline-examples\data\images\readme\5.png)
+![](data\images\readme\5.png)
 
 ##### **install**
 
-1.启动地图数据服务器托管数据，下载部署详见 | you should start the light-mbtiles-server first :[https://github.com/undefinedGIS/light-mbtiles-server.git]()；
+1.启动地图数据服务器托管数据，下载部署详见 | You should start the light-mbtiles-server first :[https://github.com/undefinedGIS/light-mbtiles-server.git]()；
 
 2.使用Web服务器，如Tomcat启动该项目 | Then use a web server to start the project, such as tomcat.
 
