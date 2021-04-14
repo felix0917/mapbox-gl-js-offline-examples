@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Add a default marker to a web map</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.392, 39.913],
+          zoom: 14,
+          bearing: -2.5,
+          style: style,
+        });
+
+        // Create a default Marker and add it to the map.
+        var marker1 = new mapboxgl.Marker()
+          .setLngLat([116.390, 39.913])
+          .addTo(map);
+
+        // Create a default Marker, colored black, rotated 45 degrees.
+        var marker2 = new mapboxgl.Marker({ color: "black", rotation: 45 })
+          .setLngLat([116.393, 39.913])
+          .addTo(map);
+      }
+    </script>
+  </body>
+</html>

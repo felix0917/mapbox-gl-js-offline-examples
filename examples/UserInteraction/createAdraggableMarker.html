@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Create a draggable Marker</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .coordinates {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 40px;
+        left: 10px;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <pre id="coordinates" class="coordinates"></pre>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.392, 39.913],
+          zoom: 14,
+          bearing: -2.5,
+          style: style,
+        });
+
+        var marker = new mapboxgl.Marker({
+          draggable: true,
+        })
+          .setLngLat([116.392, 39.913])
+          .addTo(map);
+
+        function onDragEnd() {
+          var lngLat = marker.getLngLat();
+          coordinates.style.display = "block";
+          coordinates.innerHTML =
+            "Longitude: " + lngLat.lng + "<br />Latitude: " + lngLat.lat;
+        }
+
+        marker.on("dragend", onDragEnd);
+      }
+    </script>
+  </body>
+</html>

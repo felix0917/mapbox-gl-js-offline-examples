@@ -1,0 +1,46 @@
+{
+  "version": 8,
+  "name": "Blank",
+  "metadata": {
+    "mapbox:autocomposite": true,
+    "mapbox:type": "template",
+    "mapbox:sdk-support": {
+      "android": "9.3.0",
+      "ios": "5.10.0",
+      "js": "2.0.0"
+    },
+    "mapbox:groups": {},
+    "mapbox:uiParadigm": "layers"
+  },
+  "center": [
+    0,
+    0
+  ],
+  "zoom": 0,
+  "sources": {
+    "composite": {
+      "type": "raster",
+      "tiles": [
+        "http://localhost:3000/china4-10-satelite/{z}/{x}/{y}.jpg"
+      ],
+      "tileSize": 256
+    }
+  },
+  "sprite": "http://localhost:8080/mapbox-gl-js-offline-examples/resources/sprite/sprite",
+  "glyphs": "http://localhost:8080/mapbox-gl-js-offline-examples/resources/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "whugiser-02lkklmc",
+      "type": "raster",
+      "source": "composite",
+      "layout": {},
+      "paint": {}
+    }
+  ],
+  "created": "2021-04-12T08:56:47.099Z",
+  "modified": "2021-04-12T08:57:23.297Z",
+  "id": "ckned3ms819ga17o7pbncp815",
+  "owner": "whugiser",
+  "visibility": "private",
+  "draft": true
+}

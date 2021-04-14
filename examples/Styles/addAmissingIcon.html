@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Generate and add a missing icon to the map</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.392, 39.913],
+          zoom: 14,
+          bearing: -2.5,
+          style: style,
+        });
+
+        map.on("styleimagemissing", function (e) {
+          var id = e.id; // id of the missing image
+
+          // check if this missing icon is one this function can generate
+          var prefix = "square-rgb-";
+          if (id.indexOf(prefix) !== 0) return;
+
+          // extract the color from the id
+          var rgb = id.replace(prefix, "").split(",").map(Number);
+
+          var width = 64; // The image will be 64 pixels square
+          var bytesPerPixel = 4; // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
+          var data = new Uint8Array(width * width * bytesPerPixel);
+
+          for (var x = 0; x < width; x++) {
+            for (var y = 0; y < width; y++) {
+              var offset = (y * width + x) * bytesPerPixel;
+              data[offset + 0] = rgb[0]; // red
+              data[offset + 1] = rgb[1]; // green
+              data[offset + 2] = rgb[2]; // blue
+              data[offset + 3] = 255; // alpha
+            }
+          }
+
+          map.addImage(id, { width: width, height: width, data: data });
+        });
+
+        map.on("load", function () {
+          map.addLayer({
+            id: "points",
+            type: "symbol",
+            source: {
+              type: "geojson",
+              data: {
+                type: "FeatureCollection",
+                features: [
+                  {
+                    type: "Feature",
+                    geometry: {
+                      type: "Point",
+                      coordinates:  [116.385, 39.913],
+                    },
+                    properties: {
+                      color: "255,0,0",
+                    },
+                  },
+                  {
+                    type: "Feature",
+                    geometry: {
+                      type: "Point",
+                      coordinates:  [116.392, 39.913],
+                    },
+                    properties: {
+                      color: "255,209,28",
+                    },
+                  },
+                  {
+                    type: "Feature",
+                    geometry: {
+                      type: "Point",
+                      coordinates:  [116.399, 39.913],
+                    },
+                    properties: {
+                      color: "242,127,32",
+                    },
+                  },
+                ],
+              },
+            },
+            layout: {
+              "icon-image": ["concat", "square-rgb-", ["get", "color"]],
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

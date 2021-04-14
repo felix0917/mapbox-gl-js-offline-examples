@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Change building color based on zoom level</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #zoom {
+        display: block;
+        position: relative;
+        margin: 20px auto;
+        width: 50%;
+        height: 40px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        background: #ee8a65;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <button id="zoom">Zoom to buildings</button>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.391, 39.917],
+          zoom: 15,
+          bearing: -2.5,
+          style: style,
+        });
+
+        map.on("load", function () {
+          map.setPaintProperty("building", "fill-color", [
+            "interpolate",
+            ["exponential", 0.5],
+            ["zoom"],
+            15,
+            "#e2714b",
+            22,
+            "#eee695",
+          ]);
+
+          map.setPaintProperty("building", "fill-opacity", [
+            "interpolate",
+            ["exponential", 0.5],
+            ["zoom"],
+            15,
+            0,
+            22,
+            1,
+          ]);
+        });
+
+        document.getElementById("zoom").addEventListener("click", function () {
+          map.zoomTo(19, { duration: 9000 });
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Center the map on a clicked symbol</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [-90.96, -0.47],
+          zoom: 7.5,
+          style: style,
+        });
+
+        map.on("load", function () {
+          // Add an image to use as a custom marker
+          map.loadImage(
+            "https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png",
+            function (error, image) {
+              if (error) throw error;
+              map.addImage("custom-marker", image);
+              // Add a GeoJSON source with 3 points.
+              map.addSource("points", {
+                type: "geojson",
+                data: {
+                  type: "FeatureCollection",
+                  features: [
+                    {
+                      type: "Feature",
+                      properties: {},
+                      geometry: {
+                        type: "Point",
+                        coordinates: [-91.395263671875, -0.9145729757782163],
+                      },
+                    },
+                    {
+                      type: "Feature",
+                      properties: {},
+                      geometry: {
+                        type: "Point",
+                        coordinates: [-90.32958984375, -0.6344474832838974],
+                      },
+                    },
+                    {
+                      type: "Feature",
+                      properties: {},
+                      geometry: {
+                        type: "Point",
+                        coordinates: [-91.34033203125, 0.01647949196029245],
+                      },
+                    },
+                  ],
+                },
+              });
+
+              // Add a symbol layer
+              map.addLayer({
+                id: "symbols",
+                type: "symbol",
+                source: "points",
+                layout: {
+                  "icon-image": "custom-marker",
+                },
+              });
+            }
+          );
+
+          // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
+          map.on("click", "symbols", function (e) {
+            map.flyTo({
+              center: e.features[0].geometry.coordinates,
+            });
+          });
+
+          // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
+          map.on("mouseenter", "symbols", function () {
+            map.getCanvas().style.cursor = "pointer";
+          });
+
+          // Change it back to a pointer when it leaves.
+          map.on("mouseleave", "symbols", function () {
+            map.getCanvas().style.cursor = "";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

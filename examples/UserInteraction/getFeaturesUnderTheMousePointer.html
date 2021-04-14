@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Get features under the mouse pointer</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #features {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 50%;
+        overflow: auto;
+        background: rgba(255, 255, 255, 0.8);
+      }
+      #map canvas {
+        cursor: crosshair;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <pre id="features"></pre>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.392, 39.913],
+          zoom: 14,
+          bearing: -2.5,
+          style: style,
+        });
+
+        map.on("mousemove", function (e) {
+          var features = map.queryRenderedFeatures(e.point);
+
+          // Limit the number of properties we're displaying for
+          // legibility and performance
+          var displayProperties = [
+            "type",
+            "properties",
+            "id",
+            "layer",
+            "source",
+            "sourceLayer",
+            "state",
+          ];
+
+          var displayFeatures = features.map(function (feat) {
+            var displayFeat = {};
+            displayProperties.forEach(function (prop) {
+              displayFeat[prop] = feat[prop];
+            });
+            return displayFeat;
+          });
+
+          document.getElementById("features").innerHTML = JSON.stringify(
+            displayFeatures,
+            null,
+            2
+          );
+        });
+      }
+    </script>
+  </body>
+</html>

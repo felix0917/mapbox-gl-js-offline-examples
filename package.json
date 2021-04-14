@@ -1,0 +1,18 @@
+{
+  "name": "mapbox-gl-js-offline-examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "asios": "^0.21.0"
+  },
+  "author": "lffff",
+  "license": "ISC"
+}

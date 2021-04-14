@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Visualize population density</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [30.0222, -1.9596], // starting position [lng, lat]
+          zoom: 7, // starting zoom
+          style: style,
+        });
+
+        map.on("load", function () {
+          map.addSource("rwanda-provinces", {
+            type: "geojson",
+            data:
+              "https://docs.mapbox.com/mapbox-gl-js/assets/rwanda-provinces.geojson",
+          });
+          map.addLayer({
+            id: "rwanda-provinces",
+            type: "fill",
+            source: "rwanda-provinces",
+            layout: {},
+            paint: {
+              "fill-color": [
+                "let",
+                "density",
+                ["/", ["get", "population"], ["get", "sq-km"]],
+                [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  8,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    ["var", "density"],
+                    274,
+                    ["to-color", "#edf8e9"],
+                    1551,
+                    ["to-color", "#006d2c"],
+                  ],
+                  10,
+                  [
+                    "interpolate",
+                    ["linear"],
+                    ["var", "density"],
+                    274,
+                    ["to-color", "#eff3ff"],
+                    1551,
+                    ["to-color", "#08519c"],
+                  ],
+                ],
+              ],
+              "fill-opacity": 0.7,
+            },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

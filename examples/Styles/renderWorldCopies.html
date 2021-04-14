@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Render world copies</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #menu {
+        position: absolute;
+        background: #fff;
+        padding: 10px;
+        font-family: "Open Sans", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="menu">
+      <div>Set <code>renderWorldCopies</code> to:</div>
+      <div>
+        <input type="radio" id="true" name="rtoggle" value="true" checked="" />
+        <label for="true">true</label>
+      </div>
+      <div>
+        <input type="radio" id="false" name="rtoggle" value="false" />
+        <label for="false">false</label>
+      </div>
+    </div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.392, 39.913],
+          zoom: 0,
+          style: style,
+        });
+
+        var renderOptions = document.getElementById("menu");
+        var inputs = renderOptions.getElementsByTagName("input");
+
+        function switchRenderOption(option) {
+          var status = option.target.id;
+          map.setRenderWorldCopies(status === "true");
+        }
+
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].onclick = switchRenderOption;
+        }
+      }
+    </script>
+  </body>
+</html>

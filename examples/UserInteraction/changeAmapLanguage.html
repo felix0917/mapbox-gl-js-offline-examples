@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Change a map's language</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #buttons {
+        width: 90%;
+        margin: 0 auto;
+      }
+      .button {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        width: 20%;
+        padding: 8px;
+        border-radius: 3px;
+        margin-top: 10px;
+        font-size: 12px;
+        text-align: center;
+        color: #fff;
+        background: #ee8a65;
+        font-family: sans-serif;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <ul id="buttons">
+      <li id="button-zh" class="button">China</li>
+      <li id="button-fr" class="button">French</li>
+      <li id="button-de" class="button">German</li>
+      <li id="button-es" class="button">Spanish</li>
+    </ul>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [103.463, 33.415],
+          zoom: 2,
+          style: style,
+        });
+
+        document
+          .getElementById("buttons")
+          .addEventListener("click", function (event) {
+            var language = event.target.id.substr("button-".length);
+            // Use setLayoutProperty to set the value of a layout property in a style layer.
+            // The three arguments are the id of the layer, the name of the layout property,
+            // and the new property value.
+            map.setLayoutProperty("place-country-label", "text-field", [
+              "get",
+              "name:" + language,
+            ]);
+          });
+      }
+    </script>
+  </body>
+</html>

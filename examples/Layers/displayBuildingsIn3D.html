@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Display buildings in 3D</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="../../lib/mapbox-gl.js"></script>
+    <link href="../../lib/mapbox-gl.css" rel="stylesheet" />
+    <script src="../../lib/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let baseDataUrl = `http://${localStorage.getItem(
+        "host"
+      )}/mapbox-gl-js-offline-examples`;
+      axios
+        .get(
+          baseDataUrl +
+            `/resources/styles/${localStorage.getItem(
+              "mbtilesStylesName"
+            )}.json`
+        )
+        .then((res) => {
+          let data = res.data;
+          initMap(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      function initMap(style) {
+        let map = new mapboxgl.Map({
+          container: "map",
+          center: [116.391, 39.917],
+          zoom: 17,
+          pitch:65,
+          style: style,
+        });
+
+        map.on("load", function () {
+          // Insert the layer beneath any symbol layer.
+          var layers = map.getStyle().layers;
+          var labelLayerId;
+          for (var i = 0; i < layers.length; i++) {
+            if (layers[i].type === "symbol" && layers[i].layout["text-field"]) {
+              labelLayerId = layers[i].id;
+              break;
+            }
+          }
+
+          // The 'building' layer in the Mapbox Streets
+          // vector tileset contains building height data
+          // from OpenStreetMap.
+          map.addLayer(
+            {
+              id: "add-3d-buildings",
+              source: "composite",
+              "source-layer": "building",
+              // filter: ["==", "extrude", "true"],
+              type: "fill-extrusion",
+              minzoom: 14,
+              paint: {
+                "fill-extrusion-color": "#aaa",
+
+                // Use an 'interpolate' expression to
+                // add a smooth transition effect to
+                // the buildings as the user zooms in.
+                "fill-extrusion-height": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  13,
+                  0,
+                  15.05,
+                  ["get", "render_height"],
+                ],
+                "fill-extrusion-base": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  13,
+                  0,
+                  15.05,
+                  ["get", "render_min_height"],
+                ],
+                "fill-extrusion-opacity": 0.6,
+              },
+            },
+
+            labelLayerId
+          );
+        });
+      }
+    </script>
+  </body>
+</html>

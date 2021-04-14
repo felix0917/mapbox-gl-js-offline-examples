@@ -1,0 +1,328 @@
+{
+  "GettingStarted": [
+    {
+      "title": "displayAmap",
+      "describe": "display a map",
+      "fileName": "displayAmap"
+    }
+  ],
+  "Styles": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAdefaultMarker"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAgeneratedIcon"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAnAnimatedIcon"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAnIcon"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayAsatellite"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAmissingIcon"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "renderWorldCopies"
+    }
+  ],
+  "Layers": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addA3Dmodel"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAcustomStyleLayer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAgeojsonLine"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAgradientSkyLayer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAnAtmosphericSkyLayer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAnewLayerBelowLabels"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addApatternToApolygon"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAstretchableImage"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "animateAline"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "animateApoint"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "animateAseriesOfImages"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "changeLayersColor"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAheatMapLayer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAndStyleClusters"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "customCluster"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "indoorMap"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addMultipleGeometries"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAgradientLine"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "visualizePopulationDensity"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayBuildingsIn3D"
+    }
+  ],
+  "Sources": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "updateFeature"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAcanvasSource"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayLineCrosses180thMeridian"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAtimeSlider"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addAwmsSource"
+    }
+  ],
+  "Camera": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "animateApointAlongAroute"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "centerTheMapOnAclickedSymbol"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "fitAmapToaBoundingBox"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "flyToaLocation"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "slowlyFlyToAlocation"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "jumpToAseriesOfLocations"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "offsetTheVanishingPointUsingPadding"
+    }
+  ],
+  "ControlsAndOverlays": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "animateAmarker"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "drawApolygonAndCalculateItsArea"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "showPolygonInformationOnClick"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "viewAfullscreenMap"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayApopupOnHover"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayApopup"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "attachApopupToAmarkerInstance"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayMapNavigationControls"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "displayApopupOnClick"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "addCustomIconsWithMarkers"
+    }
+  ],
+  "UserInteraction": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAhoverEffect"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "changeAmapLanguage"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAdraggablePoint"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "createAdraggableMarker"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "getCoordinatesOfTheMousePointer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "getFeaturesUnderTheMousePointer"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "toggleInteractions"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "measureDistances"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "restrictMapPanningToAnArea"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "fitToTheBoundsOfALineString"
+    },
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "changeBuildingColorBasedOnZoomLevel"
+    }
+  ],
+  "BrowserSupport": [
+    {
+      "title": "",
+      "describe": "",
+      "fileName": "checkSupported"
+    }
+  ]
+}
