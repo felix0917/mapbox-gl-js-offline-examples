@@ -4,15 +4,15 @@
 
 #####   **mapbox gl js offline examples | 离线示例**
 
-![](data\images\readme\1.png)
+![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/1.png)
 
-![](data\images\readme\2.png)
+![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/2.png)
 
-![](data\images\readme\3.png)
+![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/3.png)
 
-![](data\images\readme\4.png)
+![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/4.png)
 
-![](data\images\readme\5.png)
+![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/5.png)
 
 ##### **install**
 
