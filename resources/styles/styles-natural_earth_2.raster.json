@@ -26,7 +26,7 @@
       "tileSize": 256
     }
   },
-  "sprite": "http://localhost:8080/mapbox-gl-js-offline-examples/resources/sprite/sprite",
+  "sprite": "http://localhost:8080/mapbox-gl-js-offline-examples/resources/sprite/sprite1@2x",
   "glyphs": "http://localhost:8080/mapbox-gl-js-offline-examples/resources/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {

@@ -58,7 +58,7 @@
           // from GL JS's use in the added source. You can use any request method (library
           // or otherwise) that you want.
           d3.json(
-            "https://docs.mapbox.com/mapbox-gl-js/assets/hike.geojson",
+            baseDataUrl + "/data/geojson/hike.geojson",
             function (err, data) {
               if (err) throw err;
 
