@@ -16,8 +16,8 @@
 
 #### **install**
 
-1.启动地图数据服务器托管数据，下载部署详见 | You should start the light-mbtiles-server first :[https://github.com/undefinedGIS/light-mbtiles-server]()；
-
+1.启动地图数据服务器托管数据，下载部署详见 | You should start the light-mbtiles-server first:
+[https://github.com/undefinedGIS/light-mbtiles-server]()；
 2.使用Web服务器，如Tomcat启动该项目 | Then use a web server to start the project, such as tomcat.
 
 #### **start**

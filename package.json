@@ -1,8 +1,11 @@
 {
   "name": "mapbox-gl-js-offline-examples",
   "version": "1.0.0",
-  "description": "",
+  "description": "mapbox gl js offline examples",
+  "repository": "https://github.com/undefinedGIS/mapbox-gl-js-offline-examples.git",
   "main": "index.js",
+  "author": "undefinedGIS",
+  "license": "ISC",
   "directories": {
     "example": "examples",
     "lib": "lib"
@@ -12,7 +15,5 @@
   },
   "dependencies": {
     "asios": "^0.21.0"
-  },
-  "author": "lffff",
-  "license": "ISC"
+  }
 }
