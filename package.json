@@ -5,7 +5,6 @@
   "repository": "https://github.com/undefinedGIS/mapbox-gl-js-offline-examples.git",
   "main": "index.js",
   "author": "undefinedGIS",
-  "license": "ISC",
   "directories": {
     "example": "examples",
     "lib": "lib"
