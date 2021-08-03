@@ -16,9 +16,7 @@
 
 ![](https://github.com/undefinedGIS/mapbox-gl-js-offline-examples/blob/master/data/images/readme/5.png)
 
-mapbox-gl-js官方最新示例离线版
-提供mapbox-gl-js、示例集、字体（glyphs）、雪碧图（sprites）、地图样式（styles）、mbtiles矢量栅格数据、mbtiles数据服务器等离线处理，
-提供北京地区带mapbox样式的详细城市地图数据，中国4-10级影像数据，全球影像数据。
+mapbox-gl-js官方最新示例离线版，提供mapbox-gl-js、示例集、字体（glyphs）、雪碧图（sprites）、地图样式（styles）、mbtiles矢量栅格数据、mbtiles数据服务器等离线处理，提供北京地区带mapbox样式的详细城市地图数据，中国4-10级影像数据，全球影像数据。
 #### **install**
 
 1.启动地图数据服务器托管数据，下载部署详见 | You should start the light-mbtiles-server first: [light-mbtiles-server](https://github.com/undefinedGIS/light-mbtiles-server);
